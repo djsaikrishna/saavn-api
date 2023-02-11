@@ -5,6 +5,10 @@ import makeImages from "../utils/makeImages.js";
 class MainWorker extends HttpWorker {
   makeSongPayload(unmodifiedRes) {
     let modifiedRes = {
+      apiUrl: {
+        album: `${this.baseApiUrl}/album?id=${unmodifiedRes.albumid}`,
+        primaryArtists: `${this.baseApiUrl}/artist?id=${unmodifiedRes.primary_artists_id}`,
+      },
       id: unmodifiedRes.id,
       type: unmodifiedRes.type,
       is320kbps: unmodifiedRes["320kbps"] === "true",
@@ -36,10 +40,6 @@ class MainWorker extends HttpWorker {
         singers: unmodifiedRes.singers,
         artistMap: unmodifiedRes.artistMap,
         starring: unmodifiedRes.starring,
-      },
-      apiUrl: {
-        album: `${this.baseApiUrl}/album?id=${unmodifiedRes.albumid}`,
-        primaryArtists: `${this.baseApiUrl}/artist?id=${unmodifiedRes.primary_artists_id}`,
       },
     };
     return modifiedRes;
@@ -107,17 +107,20 @@ class MainWorker extends HttpWorker {
       topSongs: unmodifiedRes.topSongs.map((item) => {
         topSongs.push(item.id);
         return {
+          apiUrl: {
+            song: `${this.baseApiUrl}/songs?id=${item.id}`,
+            album: `${this.baseApiUrl}/album?id=${item.more_info.album_id}`,
+          },
           id: item.id,
           title: item.title,
           subtitle: item.subtitle,
           image: makeImages(item.image),
           year: item.year,
-          apiUrl: {
-            song: `${this.baseApiUrl}/songs?id=${item.id}`,
-            album: `${this.baseApiUrl}/album?id=${item.more_info.album_id}`,
-          },
         };
       }),
+      apiUrl: {
+        getTopSongs: `${this.baseApiUrl}/songs?id=${topSongs.join(",")}`,
+      },
       topAlbums: unmodifiedRes.topAlbums.map((item) => {
         return {
           id: item.id,
@@ -166,9 +169,6 @@ class MainWorker extends HttpWorker {
           },
         };
       }),
-      apiUrl: {
-        getTopSongs: `${this.baseApiUrl}/songs?id=${topSongs.join(",")}`,
-      },
     };
     return modifiedRes;
   }
