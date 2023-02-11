@@ -1,5 +1,5 @@
 const makeAudio = (audioUrl) => {
-   if (!audioUrl.includes("preview.saavncdn.com")) {
+   if (!audioUrl) {
       return false;
    }
    let returnObj = {};

@@ -1,12 +1,13 @@
 import axios from "axios";
 import ERRORS from "../errors/errors.js";
-import BASE_CALLS, { BASE_URL } from "../utils/base.js";
+import BASE_CALLS, { BASE_API_URL, BASE_URL } from "../utils/base.js";
 
 class HttpWorker {
    constructor() {
       this.baseUrl = BASE_URL;
       this.baseCalls = BASE_CALLS;
       this.error = ERRORS;
+      this.baseApiUrl = BASE_API_URL;
    }
    async http(call, isApiV4, params) {
       const responce = await axios.get(this.baseUrl, {

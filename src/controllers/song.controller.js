@@ -7,8 +7,8 @@ const songController = async (req, res) => {
          .status(ERRORS.badRequest().CODE)
          .json(ERRORS.badRequest(["id"]));
    }
-   const songWorker = new SongWorker();
-   return res.json(await songWorker.getDetails(req.query.id));
+
+   return res.json(await new SongWorker().getDetails(req.query.id));
 };
 
 export default songController;

@@ -1,4 +1,5 @@
 export const BASE_URL = "https://www.jiosaavn.com/api.php";
+export const BASE_API_URL = "http://localhost:8000/api";
 
 const BASE_CALLS = {
    //! Browse Section
@@ -30,26 +31,3 @@ const BASE_CALLS = {
 };
 
 export default BASE_CALLS;
-
-export const queryAndHeaders = (call) => {
-   const isApiV4 = () => {
-      if (call === BASE_CALLS.getSongFromId) {
-         return undefined;
-      }
-      return 4;
-   };
-   const returnObj = {
-      params: {
-         __call: call,
-         api_version: isApiV4(),
-         _format: "json",
-         _marker: "0",
-         ctx: "wap6dot0",
-      },
-      headers: {
-         authority: "www.jiosaavn.com",
-         cookie: "DL=english;L=hindi%2Cenglish",
-      },
-   };
-   return returnObj;
-};
