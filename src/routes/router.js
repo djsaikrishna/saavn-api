@@ -7,9 +7,9 @@ import songController from "../controllers/song.controller.js";
 const router = express.Router();
 
 router
-   .get("/songs", songController)
-   .get("/playlist", playlistController)
-   .get("/album", albumController)
-   .get("/artist", artistController);
+  .get("/songs", songController)
+  .get("/playlist", playlistController)
+  .get("/album", albumController)
+  .get("/artist", artistController);
 
 export default router;
