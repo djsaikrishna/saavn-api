@@ -9,4 +9,4 @@ const albumController = async (req, res) => {
   res.json(albumRes);
 };
 
-export default albumController;
+export default albumController

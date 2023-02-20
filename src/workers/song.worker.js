@@ -10,7 +10,6 @@ class SongWorker extends MainWorker {
     if (!songRes.songs) {
       return this.error.notFound;
     }
-
     songRes.songs = songRes.songs.map((song) => {
       return this.makeSongPayload(song);
     });
